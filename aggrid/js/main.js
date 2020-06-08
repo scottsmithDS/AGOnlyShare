@@ -3,17 +3,6 @@
 const columnDefs = [
     {headerName: "Price", field: "price"},
 ];
-// filter types
-const FILTER_TYPES = {
-    number: {
-        filter: 'agNumberColumnFilter',
-        options: ['equals', 'notEqual', 'lessThan', 'lessThanOrEqual', 'greaterThan', 'greaterThanOrEqual', 'inRange', 'empty']
-    },
-    string: {
-        filter: 'agTextColumnFilter',
-        options: ['equals', 'notEqual', 'contains', 'notContains', 'startsWith', 'endsWith', 'empty']
-    }
-};
 
 const gridDiv = document.querySelector('#myGrid');
 
@@ -28,7 +17,9 @@ const loadData = (source) => {
 
             /** Generate column definitions from data keys **/
             const firstRow = json[ Object.keys(json)[0] ];
-            const columnDefs = Object.keys(firstRow).map(key => ({'headerName': key, 'field': key, sortable : true, filter : FILTER_TYPES[typeof firstRow[key]].filter, filterParams: {filterOptions: FILTER_TYPES[typeof firstRow[key]].options}}));
+            const columnDefs = Object.keys(firstRow).map(key => (
+                { 'headerName': key, 'field': key,  filter: isNaN(firstRow[key]) ? "agTextColumnFilter" : "agNumberColumnFilter", 
+                sortable : true, checkboxSelection: true }) );
 
             /** original JSON data are hash { id: {..data}}.
              * ag-grid require array
