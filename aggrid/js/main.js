@@ -5,8 +5,14 @@ const columnDefs = [
 ];
 // filter types
 const FILTER_TYPES = {
-    number: 'agNumberColumnFilter',
-    string: 'agTextColumnFilter'
+    number: {
+        filter: 'agNumberColumnFilter',
+        options: ['equals', 'notEqual', 'lessThan', 'lessThanOrEqual', 'greaterThan', 'greaterThanOrEqual', 'inRange', 'empty']
+    },
+    string: {
+        filter: 'agTextColumnFilter',
+        options: ['equals', 'notEqual', 'contains', 'notContains', 'startsWith', 'endsWith', 'empty']
+    }
 };
 
 const gridDiv = document.querySelector('#myGrid');
@@ -22,7 +28,7 @@ const loadData = (source) => {
 
             /** Generate column definitions from data keys **/
             const firstRow = json[ Object.keys(json)[0] ];
-            const columnDefs = Object.keys(firstRow).map(key => ({'headerName': key, 'field': key, sortable : true, filter : FILTER_TYPES[typeof firstRow[key]], filterParams: {filterOptions: ['equals', 'notEqual', 'contains', 'notContains', 'startsWith', 'endsWith', 'lessThan', 'lessThanOrEqual', 'greaterThan', 'greaterThanOrEqual', 'inRange', 'empty']} }) );
+            const columnDefs = Object.keys(firstRow).map(key => ({'headerName': key, 'field': key, sortable : true, filter : FILTER_TYPES[typeof firstRow[key]].filter, filterParams: {filterOptions: FILTER_TYPES[typeof firstRow[key]].options}}));
 
             /** original JSON data are hash { id: {..data}}.
              * ag-grid require array
