@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ag-grid demo</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="js/ag-grid-enterprise.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <h1> test </h1>
+    <div class="row">
+        <div class="col">
+            <label for="source">Select source</label>
+            <select id="source" name="source">
+                <option value="" selected>Select source</option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="USBeerMarketBrands">USBeerMarketBrands</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <!-- <button onclick="getSelectedRows()">Get Selected Rows</button> -->
+            <div id="myGrid" style="height: 400px;" class="ag-theme-alpine"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
